@@ -1,0 +1,1141 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"details","service":"details"},"name":"details","namespace":"bookinfo"},"spec":{"ports":[{"name":"http","port":9080}],"selector":{"app":"details"}}}
+    creationTimestamp: "2020-04-25T17:07:22Z"
+    labels:
+      app: details
+      service: details
+    name: details
+    namespace: bookinfo
+    resourceVersion: "471207"
+    selfLink: /api/v1/namespaces/bookinfo/services/details
+    uid: 2ec334c9-07e1-44a7-beae-7e4f0438ac54
+  spec:
+    clusterIP: 172.30.190.4
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+      targetPort: 9080
+    selector:
+      app: details
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"productpage","service":"productpage"},"name":"productpage","namespace":"bookinfo"},"spec":{"ports":[{"name":"http","port":9080}],"selector":{"app":"productpage"}}}
+    creationTimestamp: "2020-04-25T17:07:24Z"
+    labels:
+      app: productpage
+      service: productpage
+    name: productpage
+    namespace: bookinfo
+    resourceVersion: "471314"
+    selfLink: /api/v1/namespaces/bookinfo/services/productpage
+    uid: f8e7edac-d901-4553-a1ce-fd22c11929b2
+  spec:
+    clusterIP: 172.30.239.200
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+      targetPort: 9080
+    selector:
+      app: productpage
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"ratings","service":"ratings"},"name":"ratings","namespace":"bookinfo"},"spec":{"ports":[{"name":"http","port":9080}],"selector":{"app":"ratings"}}}
+    creationTimestamp: "2020-04-25T17:07:22Z"
+    labels:
+      app: ratings
+      service: ratings
+    name: ratings
+    namespace: bookinfo
+    resourceVersion: "471233"
+    selfLink: /api/v1/namespaces/bookinfo/services/ratings
+    uid: 1a7ff0a4-96e8-4841-9a9b-0bed14203808
+  spec:
+    clusterIP: 172.30.197.127
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+      targetPort: 9080
+    selector:
+      app: ratings
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"reviews","service":"reviews"},"name":"reviews","namespace":"bookinfo"},"spec":{"ports":[{"name":"http","port":9080}],"selector":{"app":"reviews"}}}
+    creationTimestamp: "2020-04-25T17:07:23Z"
+    labels:
+      app: reviews
+      service: reviews
+    name: reviews
+    namespace: bookinfo
+    resourceVersion: "471259"
+    selfLink: /api/v1/namespaces/bookinfo/services/reviews
+    uid: cc23e229-9f85-4c42-b3ca-8a6b32ed6db6
+  spec:
+    clusterIP: 172.30.168.37
+    ports:
+    - name: http
+      port: 9080
+      protocol: TCP
+      targetPort: 9080
+    selector:
+      app: reviews
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"details","version":"v1"},"name":"details-v1","namespace":"bookinfo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"details","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"details","version":"v1"}},"spec":{"containers":[{"image":"maistra/examples-bookinfo-details-v1:1.1.0","imagePullPolicy":"IfNotPresent","name":"details","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-details"}}}}
+    creationTimestamp: "2020-04-25T17:07:22Z"
+    generation: 1
+    labels:
+      app: details
+      version: v1
+    name: details-v1
+    namespace: bookinfo
+    resourceVersion: "10374850"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/deployments/details-v1
+    uid: f80619e1-c031-4fbe-8f52-e8948d4c4f0a
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: details
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: details
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-details-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: details
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-details
+        serviceAccountName: bookinfo-details
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-04-25T17:07:22Z"
+      lastUpdateTime: "2020-04-25T17:09:00Z"
+      message: ReplicaSet "details-v1-d7db4d55b" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2020-05-08T09:40:43Z"
+      lastUpdateTime: "2020-05-08T09:40:43Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    - lastTransitionTime: "2020-05-08T09:40:43Z"
+      lastUpdateTime: "2020-05-08T09:40:43Z"
+      message: 'pods "details-v1-d7db4d55b-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 1
+    unavailableReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      app.openshift.io/connects-to: details-v1,reviews-v1,reviews-v2,reviews-v3
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"productpage","version":"v1"},"name":"productpage-v1","namespace":"bookinfo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"productpage","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"productpage","version":"v1"}},"spec":{"containers":[{"image":"maistra/examples-bookinfo-productpage-v1:1.1.0","imagePullPolicy":"IfNotPresent","name":"productpage","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-productpage"}}}}
+    creationTimestamp: "2020-04-25T17:07:24Z"
+    generation: 5
+    labels:
+      app: productpage
+      app.kubernetes.io/part-of: page
+      version: v1
+    name: productpage-v1
+    namespace: bookinfo
+    resourceVersion: "14998789"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/deployments/productpage-v1
+    uid: 8d643e82-7a57-4b0d-9966-2ff3d34e2836
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: productpage
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: productpage
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-productpage-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: productpage
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-productpage
+        serviceAccountName: bookinfo-productpage
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-04-25T17:07:24Z"
+      lastUpdateTime: "2020-04-25T17:09:10Z"
+      message: ReplicaSet "productpage-v1-5f598fbbf4" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2020-05-08T09:46:07Z"
+      lastUpdateTime: "2020-05-08T09:46:07Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    - lastTransitionTime: "2020-05-08T09:46:07Z"
+      lastUpdateTime: "2020-05-08T09:46:07Z"
+      message: 'pods "productpage-v1-5f598fbbf4-" is forbidden: unable to validate
+        against any security context constraint: [spec.volumes[1]: Invalid value:
+        "emptyDir": emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 5
+    unavailableReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"ratings","version":"v1"},"name":"ratings-v1","namespace":"bookinfo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"ratings","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"ratings","version":"v1"}},"spec":{"containers":[{"image":"maistra/examples-bookinfo-ratings-v1:1.1.0","imagePullPolicy":"IfNotPresent","name":"ratings","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-ratings"}}}}
+    creationTimestamp: "2020-04-25T17:07:23Z"
+    generation: 3
+    labels:
+      app: ratings
+      version: v1
+    name: ratings-v1
+    namespace: bookinfo
+    resourceVersion: "15227688"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/deployments/ratings-v1
+    uid: b6bcdd77-e366-4dfe-b363-c8d81eea47da
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: ratings
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: ratings
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-ratings-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: ratings
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-ratings
+        serviceAccountName: bookinfo-ratings
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-04-25T17:07:23Z"
+      lastUpdateTime: "2020-04-25T17:09:13Z"
+      message: ReplicaSet "ratings-v1-85957d89d8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2020-05-13T12:34:43Z"
+      lastUpdateTime: "2020-05-13T12:34:43Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    - lastTransitionTime: "2020-05-13T12:34:43Z"
+      lastUpdateTime: "2020-05-13T12:34:43Z"
+      message: 'pods "ratings-v1-85957d89d8-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 3
+    unavailableReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v1"},"name":"reviews-v1","namespace":"bookinfo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v1"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"reviews","version":"v1"}},"spec":{"containers":[{"image":"maistra/examples-bookinfo-reviews-v1:1.1.0","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-reviews"}}}}
+    creationTimestamp: "2020-04-25T17:07:23Z"
+    generation: 1
+    labels:
+      app: reviews
+      app.kubernetes.io/part-of: reviews
+      version: v1
+    name: reviews-v1
+    namespace: bookinfo
+    resourceVersion: "14972723"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/deployments/reviews-v1
+    uid: eb3c717c-9dc4-4471-9e21-5629bed82dd4
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: reviews
+        version: v1
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-reviews-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-04-25T17:07:23Z"
+      lastUpdateTime: "2020-04-25T17:10:53Z"
+      message: ReplicaSet "reviews-v1-67d9b4bcc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2020-05-08T09:46:07Z"
+      lastUpdateTime: "2020-05-08T09:46:07Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    - lastTransitionTime: "2020-05-08T09:46:07Z"
+      lastUpdateTime: "2020-05-08T09:46:07Z"
+      message: 'pods "reviews-v1-67d9b4bcc-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 1
+    unavailableReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      app.openshift.io/connects-to: ratings-v1
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v2"},"name":"reviews-v2","namespace":"bookinfo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v2"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"reviews","version":"v2"}},"spec":{"containers":[{"image":"maistra/examples-bookinfo-reviews-v2:1.1.0","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-reviews"}}}}
+    creationTimestamp: "2020-04-25T17:07:24Z"
+    generation: 6
+    labels:
+      app: reviews
+      app.kubernetes.io/part-of: reviews
+      version: v2
+    name: reviews-v2
+    namespace: bookinfo
+    resourceVersion: "14973173"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/deployments/reviews-v2
+    uid: 39aa2622-fc1d-4dde-a2b9-5dfed5a4b1c0
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: reviews
+        version: v2
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          version: v2
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-reviews-v2:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-04-25T17:07:24Z"
+      lastUpdateTime: "2020-04-25T17:10:55Z"
+      message: ReplicaSet "reviews-v2-67b465c497" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2020-05-08T09:40:44Z"
+      lastUpdateTime: "2020-05-08T09:40:44Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    - lastTransitionTime: "2020-05-08T09:40:44Z"
+      lastUpdateTime: "2020-05-08T09:40:44Z"
+      message: 'pods "reviews-v2-67b465c497-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 6
+    unavailableReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      app.openshift.io/connects-to: ratings-v1
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"reviews","version":"v3"},"name":"reviews-v3","namespace":"bookinfo"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"reviews","version":"v3"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"},"labels":{"app":"reviews","version":"v3"}},"spec":{"containers":[{"image":"maistra/examples-bookinfo-reviews-v3:1.1.0","imagePullPolicy":"IfNotPresent","name":"reviews","ports":[{"containerPort":9080}]}],"serviceAccountName":"bookinfo-reviews"}}}}
+    creationTimestamp: "2020-04-25T17:07:24Z"
+    generation: 2
+    labels:
+      app: reviews
+      app.kubernetes.io/part-of: reviews
+      version: v3
+    name: reviews-v3
+    namespace: bookinfo
+    resourceVersion: "14973004"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/deployments/reviews-v3
+    uid: d8c792b4-f5e1-4be3-8383-77127e88c3c9
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: reviews
+        version: v3
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          version: v3
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-reviews-v3:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-04-25T17:07:24Z"
+      lastUpdateTime: "2020-04-25T17:10:59Z"
+      message: ReplicaSet "reviews-v3-7bd659b757" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2020-05-08T09:40:49Z"
+      lastUpdateTime: "2020-05-08T09:40:49Z"
+      message: Deployment does not have minimum availability.
+      reason: MinimumReplicasUnavailable
+      status: "False"
+      type: Available
+    - lastTransitionTime: "2020-05-08T09:40:49Z"
+      lastUpdateTime: "2020-05-08T09:40:49Z"
+      message: 'pods "reviews-v3-7bd659b757-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 2
+    unavailableReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2020-04-25T17:07:22Z"
+    generation: 1
+    labels:
+      app: details
+      pod-template-hash: d7db4d55b
+      version: v1
+    name: details-v1-d7db4d55b
+    namespace: bookinfo
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: details-v1
+      uid: f80619e1-c031-4fbe-8f52-e8948d4c4f0a
+    resourceVersion: "10374837"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/replicasets/details-v1-d7db4d55b
+    uid: 62c2f694-2878-416d-9817-6d8a79ab7fcd
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: details
+        pod-template-hash: d7db4d55b
+        version: v1
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: details
+          pod-template-hash: d7db4d55b
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-details-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: details
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-details
+        serviceAccountName: bookinfo-details
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-05-08T09:40:43Z"
+      message: 'pods "details-v1-d7db4d55b-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 1
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      app.openshift.io/connects-to: details-v1,reviews-v1,reviews-v2,reviews-v3
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2020-04-25T17:07:24Z"
+    generation: 1
+    labels:
+      app: productpage
+      pod-template-hash: 5f598fbbf4
+      version: v1
+    name: productpage-v1-5f598fbbf4
+    namespace: bookinfo
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: productpage-v1
+      uid: 8d643e82-7a57-4b0d-9966-2ff3d34e2836
+    resourceVersion: "10382484"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/replicasets/productpage-v1-5f598fbbf4
+    uid: 0d31c267-3e7e-4ea9-bdbd-788e01053963
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: productpage
+        pod-template-hash: 5f598fbbf4
+        version: v1
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: productpage
+          pod-template-hash: 5f598fbbf4
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-productpage-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: productpage
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-productpage
+        serviceAccountName: bookinfo-productpage
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-05-08T09:46:07Z"
+      message: 'pods "productpage-v1-5f598fbbf4-" is forbidden: unable to validate
+        against any security context constraint: [spec.volumes[1]: Invalid value:
+        "emptyDir": emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 1
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2020-04-25T17:07:23Z"
+    generation: 3
+    labels:
+      app: ratings
+      pod-template-hash: 85957d89d8
+      version: v1
+    name: ratings-v1-85957d89d8
+    namespace: bookinfo
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: ratings-v1
+      uid: b6bcdd77-e366-4dfe-b363-c8d81eea47da
+    resourceVersion: "15227686"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/replicasets/ratings-v1-85957d89d8
+    uid: a23afc6e-fbfe-4ff4-87f5-a3804dc74682
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: ratings
+        pod-template-hash: 85957d89d8
+        version: v1
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: ratings
+          pod-template-hash: 85957d89d8
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-ratings-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: ratings
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-ratings
+        serviceAccountName: bookinfo-ratings
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-05-13T12:34:43Z"
+      message: 'pods "ratings-v1-85957d89d8-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 3
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2020-04-25T17:07:23Z"
+    generation: 1
+    labels:
+      app: reviews
+      pod-template-hash: 67d9b4bcc
+      version: v1
+    name: reviews-v1-67d9b4bcc
+    namespace: bookinfo
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: reviews-v1
+      uid: eb3c717c-9dc4-4471-9e21-5629bed82dd4
+    resourceVersion: "10382490"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/replicasets/reviews-v1-67d9b4bcc
+    uid: 4a1a6b75-8acf-4374-980c-584efe2fdd54
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: reviews
+        pod-template-hash: 67d9b4bcc
+        version: v1
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          pod-template-hash: 67d9b4bcc
+          version: v1
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-reviews-v1:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-05-08T09:46:07Z"
+      message: 'pods "reviews-v1-67d9b4bcc-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 1
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      app.openshift.io/connects-to: ratings-v1
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2020-04-25T17:07:24Z"
+    generation: 5
+    labels:
+      app: reviews
+      pod-template-hash: 67b465c497
+      version: v2
+    name: reviews-v2-67b465c497
+    namespace: bookinfo
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: reviews-v2
+      uid: 39aa2622-fc1d-4dde-a2b9-5dfed5a4b1c0
+    resourceVersion: "10374886"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/replicasets/reviews-v2-67b465c497
+    uid: ad77d8a8-a89b-4282-be44-fe66d768d4b3
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: reviews
+        pod-template-hash: 67b465c497
+        version: v2
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          pod-template-hash: 67b465c497
+          version: v2
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-reviews-v2:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-05-08T09:40:44Z"
+      message: 'pods "reviews-v2-67b465c497-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 5
+    replicas: 0
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      app.openshift.io/connects-to: ratings-v1
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2020-04-25T17:07:24Z"
+    generation: 1
+    labels:
+      app: reviews
+      pod-template-hash: 7bd659b757
+      version: v3
+    name: reviews-v3-7bd659b757
+    namespace: bookinfo
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: reviews-v3
+      uid: d8c792b4-f5e1-4be3-8383-77127e88c3c9
+    resourceVersion: "10375461"
+    selfLink: /apis/apps/v1/namespaces/bookinfo/replicasets/reviews-v3-7bd659b757
+    uid: da59e0b5-81bf-4a73-8aa4-a5d0deb11aec
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: reviews
+        pod-template-hash: 7bd659b757
+        version: v3
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "true"
+        creationTimestamp: null
+        labels:
+          app: reviews
+          pod-template-hash: 7bd659b757
+          version: v3
+      spec:
+        containers:
+        - image: maistra/examples-bookinfo-reviews-v3:1.1.0
+          imagePullPolicy: IfNotPresent
+          name: reviews
+          ports:
+          - containerPort: 9080
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: bookinfo-reviews
+        serviceAccountName: bookinfo-reviews
+        terminationGracePeriodSeconds: 30
+  status:
+    conditions:
+    - lastTransitionTime: "2020-05-08T09:40:49Z"
+      message: 'pods "reviews-v3-7bd659b757-" is forbidden: unable to validate against
+        any security context constraint: [spec.volumes[1]: Invalid value: "emptyDir":
+        emptyDir volumes are not allowed to be used spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be: 101 spec.containers[0].securityContext.securityContext.runAsUser:
+        Invalid value: 101: must be in the ranges: [1000560000, 1000569999] capabilities.add:
+        Invalid value: "NET_BIND_SERVICE": capability may not be added spec.containers[1].securityContext.securityContext.runAsUser:
+        Invalid value: 102: must be in the ranges: [1000560000, 1000569999]]'
+      reason: FailedCreate
+      status: "True"
+      type: ReplicaFailure
+    observedGeneration: 1
+    replicas: 0
+- apiVersion: cdi.kubevirt.io/v1alpha1
+  kind: CDIConfig
+  metadata:
+    creationTimestamp: "2020-05-12T13:52:47Z"
+    generation: 3
+    labels:
+      app: containerized-data-importer
+      cdi.kubevirt.io: ""
+    name: config
+    ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1alpha1
+      blockOwnerDeletion: true
+      controller: true
+      kind: CDI
+      name: cdi-kubevirt-hyperconverged
+      uid: 5d21dd0e-4cad-4a0a-a2db-66203dd59594
+    resourceVersion: "13986763"
+    selfLink: /apis/cdi.kubevirt.io/v1alpha1/cdiconfigs/config
+    uid: 1849576c-e320-4f7c-a54e-77e48391a6c5
+  spec: {}
+  status:
+    defaultPodResourceRequirements:
+      limits:
+        cpu: "0"
+        memory: "0"
+      requests:
+        cpu: "0"
+        memory: "0"
+    scratchSpaceStorageClass: thin
+    uploadProxyURL: cdi-uploadproxy-openshift-cnv.apps.openshift.lplab.online
+- apiVersion: cdi.kubevirt.io/v1alpha1
+  kind: CDI
+  metadata:
+    creationTimestamp: "2020-05-12T13:52:19Z"
+    finalizers:
+    - operator.cdi.kubevirt.io
+    generation: 7
+    labels:
+      app: kubevirt-hyperconverged
+    name: cdi-kubevirt-hyperconverged
+    resourceVersion: "14026081"
+    selfLink: /apis/cdi.kubevirt.io/v1alpha1/cdis/cdi-kubevirt-hyperconverged
+    uid: 5d21dd0e-4cad-4a0a-a2db-66203dd59594
+  spec:
+    uninstallStrategy: BlockUninstallIfWorkloadsExist
+  status:
+    conditions:
+    - lastHeartbeatTime: "2020-05-12T13:53:05Z"
+      lastTransitionTime: "2020-05-12T13:53:05Z"
+      message: Deployment Completed
+      reason: DeployCompleted
+      status: "True"
+      type: Available
+    - lastHeartbeatTime: "2020-05-12T13:53:05Z"
+      lastTransitionTime: "2020-05-12T13:53:05Z"
+      status: "False"
+      type: Progressing
+    - lastHeartbeatTime: "2020-05-12T14:37:02Z"
+      lastTransitionTime: "2020-05-12T14:37:02Z"
+      status: "False"
+      type: Degraded
+    observedVersion: v2.3.0
+    operatorVersion: v2.3.0
+    phase: Deployed
+    targetVersion: v2.3.0
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

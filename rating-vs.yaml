@@ -1,0 +1,25 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: reviews
+  namespace: bookinfo
+spec:
+  hosts:
+    - 'productpage'
+  gateways:
+    - bookinfo-gateway
+  http:
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 10
+    - destination:
+        host: reviews
+        subset: v2
+      weight: 80
+    - destination:
+        host: reviews
+        subset: v3
+      weight: 10
+
