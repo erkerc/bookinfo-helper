@@ -1,4 +1,3 @@
-#export GATEWAY_URL=http://bookinfo-bookinfo-gateway-lh2rt-istio-tutorial.apps.cluster-ist-6c27.ist-6c27.example.opentlc.com
 export APP_URL=$(oc get route -n istio-system |grep bookinfo| awk '{print $2}')
 while true 
 do
